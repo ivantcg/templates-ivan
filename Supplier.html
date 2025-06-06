@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Jurnal Sistem Informasi Bisnis</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+      .sidebar {
+        height: 100vh;
+        background-color: #343a40;
+      }
+      .sidebar a {
+        color: white;
+      }
+      .sidebar a:hover {
+        background-color: #495057;
+      }
+      .content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <nav
+        class="sidebar d-flex flex-column p-3"
+        style="min-width: 16%; max-width: 16%"
+      >
+        <div class="row d-flex justify-content-center">
+          <img
+            src="logo-upgris.png"
+            class="mb-3"
+            alt="logo upgris"
+            width="80"
+            height="auto"
+          />
+          <h4 class="text-white mb-4 text-center">
+            Jurnal Sistem Informasi Bisnis
+          </h4>
+        </div>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a href="Home.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="Supplier.html" class="nav-link active">Supplier Management</a>
+          </li>
+          <li class="nav-item">
+            <a href="DataBarang.html" class="nav-link">Data Barang</a>
+          </li>
+          <li class="nav-item">
+            <a href="Perangkingan.html" class="nav-link ">Perangkingan</a>
+          </li>
+          <li class="nav-item mt-auto">
+            <a href="Logout.html" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="content flex-grow-1">
+        <div class="container-fluid">
+          <h2 class="mt-4">Supplier Management</h2>
+          <button
+            class="btn btn-success mb-3"
+            data-toggle="modal"
+            data-target="#addSupplierModal"
+          >
+            Add Supplier
+          </button>
+
+          <!-- Supplier Table -->
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="supplierTableBody">
+              <!-- Sample Data -->
+              <tr>
+                <td>1</td>
+                <td>Supplier A</td>
+                <td>suppliera@example.com</td>
+                <td>1234567890</td>
+                <td>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    data-toggle="modal"
+                    data-target="#editSupplierModal"
+                    onclick="editSupplier(1, 'Supplier A', 'suppliera@example.com', '1234567890')"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    onclick="deleteSupplier(1)"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Supplier B</td>
+                <td>supplierb@example.com</td>
+                <td>0987654321</td>
+                <td>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    data-toggle="modal"
+                    data-target="#editSupplierModal"
+                    onclick="editSupplier(2, 'Supplier B', 'supplierb@example.com', '0987654321')"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    onclick="deleteSupplier(2)"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Supplier Modal -->
+    <div
+      class="modal fade"
+      id="addSupplierModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addSupplierModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addSupplierModalLabel">Add Supplier</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addSupplierForm">
+              <div class="form-group">
+                <label for="supplierName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="supplierName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="supplierEmail">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="supplierEmail"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="supplierPhone">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="supplierPhone"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="addSupplier()"
+            >
+              Add Supplier
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Supplier Modal -->
+    <div
+      class="modal fade"
+      id="editSupplierModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editSupplierModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editSupplierModalLabel">
+              Edit Supplier
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editSupplierForm">
+              <input type="hidden" id="editSupplierId" />
+              <div class="form-group">
+                <label for="editSupplierName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editSupplierName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editSupplierEmail">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="editSupplierEmail"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editSupplierPhone">Phone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editSupplierPhone"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="updateSupplier()"
+            >
+              Update Supplier
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function addSupplier() {
+        // Logic to add supplier
+        const name = document.getElementById("supplierName").value;
+        const email = document.getElementById("supplierEmail").value;
+        const phone = document.getElementById("supplierPhone").value;
+
+        // Add supplier to the table (for demonstration purposes)
+        const tableBody = document.getElementById("supplierTableBody");
+        const newRow = tableBody.insertRow();
+        newRow.innerHTML = `
+<td>${tableBody.rows.length + 1}</td>
+<td>${name}</td>
+<td>${email}</td>
+<td>${phone}</td>
+<td>
+<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSupplierModal" onclick="editSupplier(${
+          tableBody.rows.length + 1
+        }, '${name}', '${email}', '${phone}')">Edit</button>
+<button class="btn btn-danger btn-sm" onclick="deleteSupplier(${
+          tableBody.rows.length + 1
+        })">Delete</button>
+</td>
+`;
+        $("#addSupplierModal").modal("hide");
+        document.getElementById("addSupplierForm").reset();
+      }
+
+      function editSupplier(id, name, email, phone) {
+        document.getElementById("editSupplierId").value = id;
+        document.getElementById("editSupplierName").value = name;
+        document.getElementById("editSupplierEmail").value = email;
+        document.getElementById("editSupplierPhone").value = phone;
+      }
+
+      function updateSupplier() {
+        const id = document.getElementById("editSupplierId").value;
+        const name = document.getElementById("editSupplierName").value;
+        const email = document.getElementById("editSupplierEmail").value;
+        const phone = document.getElementById("editSupplierPhone").value;
+
+        // Update supplier in the table (for demonstration purposes)
+        const tableBody = document.getElementById("supplierTableBody");
+        const row = tableBody.rows[id - 1];
+        row.cells[1].innerText = name;
+        row.cells[2].innerText = email;
+        row.cells[3].innerText = phone;
+
+        $("#editSupplierModal").modal("hide");
+      }
+
+      function deleteSupplier(id) {
+        const tableBody = document.getElementById("supplierTableBody");
+        tableBody.deleteRow(id - 1);
+        // Re-index the table rows if necessary
+        for (let i = id - 1; i < tableBody.rows.length; i++) {
+          tableBody.rows[i].cells[0].innerText = i + 1;
+        }
+      }
+    </script>
+  </body>
+</html>

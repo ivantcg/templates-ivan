@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Jurnal Sistem Informasi Bisnis</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+      .sidebar {
+        height: 100vh;
+        background-color: #343a40;
+      }
+      .sidebar a {
+        color: white;
+      }
+      .sidebar a:hover {
+        background-color: #495057;
+      }
+      .content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <nav
+        class="sidebar d-flex flex-column p-3"
+        style="min-width: 16%; max-width: 16%"
+      >
+        <div class="row d-flex justify-content-center">
+          <img
+            src="logo-upgris.png"
+            class="mb-3"
+            alt="logo upgris"
+            width="80"
+            height="auto"
+          />
+          <h4 class="text-white mb-4 text-center">
+            Jurnal Sistem Informasi Bisnis
+          </h4>
+        </div>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a href="Home.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="Supplier.html" class="nav-link">Supplier Management</a>
+          </li>
+          <li class="nav-item">
+            <a href="DataBarang.html" class="nav-link active">Data Barang</a>
+          </li>
+          <li class="nav-item">
+            <a href="Perangkingan.html" class="nav-link">Perangkingan</a>
+          </li>
+          <li class="nav-item mt-auto">
+            <a href="Logout.html" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </nav>
+      &nbsp; &nbsp;
+
+      <!-- Main Content -->
+      <div class="content flex-grow-1">
+        <div class="container-fluid">
+          <h2 class="mt-4">Data Barang Management</h2>
+          <button
+            class="btn btn-success mb-3"
+            data-toggle="modal"
+            data-target="#addItemModal"
+          >
+            Add Item
+          </button>
+          &nbsp; &nbsp;
+
+          <!-- Data Barang Table -->
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="itemTableBody">
+              <!-- Sample Data -->
+              <tr>
+                <td>1</td>
+                <td>Item A</td>
+                <td>Category</td>
+                <td>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    data-toggle="modal"
+                    data-target="#editItemModal"
+                    onclick="editItem(1, 'Item A', 'Category 1', 10)"
+                  >
+                    Edit
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteItem(1)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Item B</td>
+                <td>Category 2</td>
+                <td>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    data-toggle="modal"
+                    data-target="#editItemModal"
+                    onclick="editItem(2, 'Item B', 'Category 2', 15)"
+                  >
+                    Edit
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteItem(2)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    &nbsp; &nbsp;
+
+    <!-- Add Item Modal -->
+    <div
+      class="modal fade"
+      id="addItemModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addItemModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addItemModalLabel">Add Item</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addItemForm">
+              <div class="form-group">
+                <label for="itemName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="itemName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="itemCategory">Category</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="itemCategory"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="addItem()">
+              Add Item
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    &nbsp; &nbsp;
+
+    <!-- Edit Item Modal -->
+    <div
+      class="modal fade"
+      id="editItemModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editItemModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editItemModalLabel">Edit Item</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editItemForm">
+              <input type="hidden" id="editItemId" />
+              <div class="form-group">
+                <label for="editItemName">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editItemName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="editItemCategory">Category</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editItemCategory"
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="updateItem()"
+            >
+              Update Item
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    &nbsp; &nbsp;
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function addItem() {
+        const name = document.getElementById("itemName").value;
+        const category = document.getElementById("itemCategory").value;
+
+        const tableBody = document.getElementById("itemTableBody");
+        const newRow = tableBody.insertRow();
+        newRow.innerHTML = `
+<td>${tableBody.rows.length + 1}</td>
+<td>${name}</td>
+<td>${category}</td>
+<td>
+<button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editItemModal" onclick="editItem(${
+          tableBody.rows.length + 1
+        }, '${name}', '${category}', $)">Edit</button>
+<button class="btn btn-danger btn-sm" onclick="deleteItem(${
+          tableBody.rows.length + 1
+        })">Delete</button>
+</td>
+`;
+        $("#addItemModal").modal("hide");
+        document.getElementById("addItemForm").reset();
+      }
+      function editItem(id, name, category) {
+        document.getElementById("editItemId").value = id;
+        document.getElementById("editItemName").value = name;
+        document.getElementById("editItemCategory").value = category;
+      }
+      function updateItem() {
+        const id = document.getElementById("editItemId").value;
+        const name = document.getElementById("editItemName").value;
+        const category = document.getElementById("editItemCategory").value;
+        const tableBody = document.getElementById("itemTableBody");
+        const row = tableBody.rows[id - 1];
+        row.cells[1].innerText = name;
+        row.cells[2].innerText = category;
+        $("#editItemModal").modal("hide");
+      }
+      function deleteItem(id) {
+        const tableBody = document.getElementById("itemTableBody");
+        tableBody.deleteRow(id - 1);
+        // Re-index the table rows if necessary
+        for (let i = id - 1; i < tableBody.rows.length; i++) {
+          tableBody.rows[i].cells[0].innerText = i + 1;
+        }
+      }
+    </script>
+  </body>
+</html>

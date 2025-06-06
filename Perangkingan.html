@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perangkingan Supplier - Jurnal Sistem Informasi Bisnis</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .sidebar {
+        height: 100vh;
+        background-color: #343a40;
+      }
+      .sidebar a {
+        color: #ffffff;
+      }
+      .sidebar a:hover {
+        background-color: #495057;
+        text-decoration: none;
+      }
+      .content {
+        padding: 2rem;
+        overflow-y: auto;
+        max-height: 100vh;
+      }
+      .title {
+        font-weight: 700;
+        color: #17a2b8;
+      }
+      .section-title {
+        color: #343a40;
+        margin-top: 2rem;
+        font-weight: 600;
+      }
+      table {
+        background: white;
+      }
+      footer {
+        padding: 1rem;
+        text-align: center;
+        background-color: #343a40;
+        color: white;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <nav class="sidebar d-flex flex-column p-3" style="min-width: 16%; max-width: 16%;">
+        <div class="row d-flex justify-content-center">
+          <img
+            src="logo-upgris.png"
+            class="mb-3"
+            alt="logo upgris"
+            width="80"
+            height="auto"
+          />
+          <h4 class="text-white mb-4 text-center">
+            Jurnal Sistem Informasi Bisnis
+          </h4>
+        </div>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a href="Home.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="Supplier.html" class="nav-link">Supplier Management</a>
+          </li>
+          <li class="nav-item">
+            <a href="DataBarang.html" class="nav-link">Data Barang</a>
+          </li>
+          <li class="nav-item">
+            <a href="Perangkingan.html" class="nav-link active">Perangkingan</a>
+          </li>
+          <li class="nav-item mt-auto">
+            <a href="Logout.html" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="content flex-grow-1">
+        <h1 class="title">Perangkingan Supplier Bahan Baku</h1>
+
+        <section>
+          <p>
+            Berdasarkan hasil perhitungan menggunakan metode Analytical
+            Hierarchy Process (AHP), berikut adalah ranking supplier bahan baku
+            terbaik sesuai kriteria kualitas, harga, pengiriman, dan pelayanan.
+          </p>
+          <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+              <tr>
+                <th>Rank</th>
+                <th>Supplier</th>
+                <th>Nilai Akhir</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Supplier A</td>
+                <td>0.432</td>
+                <td>Supplier terbaik berdasarkan AHP</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Supplier B</td>
+                <td>0.298</td>
+                <td>Alternatif berikutnya</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Supplier C</td>
+                <td>0.270</td>
+                <td>Alternatif ketiga</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h3 class="section-title">Penjelasan Perangkingan</h3>
+          <p>
+            Metode AHP memungkinkan pembobotan kriteria dan subkriteria, serta
+            membuat perbandingan antar supplier secara konsisten. Nilai akhir
+            yang didapat adalah preferensi total tiap supplier berdasarkan
+            kriteria yang dipertimbangkan. Dengan demikian, keputusan pemilihan
+            supplier menjadi lebih objektif dan terukur.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      &copy; 2023 Jurnal Sistem Informasi Bisnis. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
